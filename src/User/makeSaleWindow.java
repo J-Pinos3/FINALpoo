@@ -1,3 +1,4 @@
+package User;
 import javax.swing.*;
 
 public class makeSaleWindow {

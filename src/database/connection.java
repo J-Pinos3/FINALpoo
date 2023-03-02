@@ -4,7 +4,7 @@ import java.sql.*;
 public class connection{
 
 
-    public static Connection getConnection(){
+    public Connection getConnection(){
 
         Connection conn = null;
         String base = "tiendabuho";
