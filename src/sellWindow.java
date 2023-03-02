@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class sellWindow extends JFrame{
+public class sellWindow extends JFrame {
     private JPanel sellW;
     private JTable sellsJT;
     private JButton addButton;
@@ -28,8 +28,10 @@ public class sellWindow extends JFrame{
     private JButton cleanButtonDe;
     private JButton searchButtonDe;
     private boolean isExists = false;
-
+}
+    /*
     public sellWindow(){
+
         // Characteristics of Window
         connection co = new connection();
         setContentPane(sellW);
@@ -355,3 +357,4 @@ public class sellWindow extends JFrame{
     }
 
 }
+*/
