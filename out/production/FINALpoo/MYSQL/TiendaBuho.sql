@@ -68,9 +68,6 @@ INSERT INTO usuario
 VALUES('1752774305', 'Franco', 'Escamilla', '2021-01-02', '0987878987', 'franco@gmail.com', 'adm', 'admin', 'admin'),
 ('1752664471', 'Juan', 'Carlos', '2022-09-13', '0961731484', 'juan@gmail.com', 'adm', 'carlos', '123');
 
-INSERT INTO usuario
-VALUES('1752774888', 'Julio', 'Ochoa', '2021-01-02', '0986678987', 'julio@gmail.com', 'ven', 'vendedor1', 'vendedor1');
-
 CREATE TABLE empresa(
 	ruc_Emp VARCHAR(13) PRIMARY KEY,
     nom_Emp VARCHAR(30) NOT NULL,
