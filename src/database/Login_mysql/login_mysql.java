@@ -1,7 +1,7 @@
 package database.Login_mysql;
 import database.connection;
 
-
+import Admin.*;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
@@ -34,14 +34,42 @@ public class login_mysql {
     }
 
 
-    public void IniciarSesion(String usuario, String clave, String rol){
+    public void IniciarSesion(String usuario, String clave){
         conn = connection.getConnection();
-        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from Usuario WHERE FKtipo_rol = ? AND usuN_Usu = ? AND pass_Usu = ?";
+        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from Usuario WHERE FKtipo_rol = 'adm' AND usuN_Usu = ? AND pass_Usu = ?";
         try{
             ps = conn.prepareStatement(sql);
-            ps.setString(1,rol);
-            ps.setString(2,usuario);
-            ps.setString(3,clave);
+            //ps.setString(1,rol);
+            ps.setString(1,usuario);
+            ps.setString(2,clave);
+
+            rs = ps.executeQuery();
+            if(rs.next() == false){
+                JOptionPane.showMessageDialog(null,"El usuario ingresado no existe");
+            }else{
+                new mainWindow();
+
+            }
+
+
+
+
+            ps.close();
+
+            conn.close();
+        }catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, "error en iniciar sesion: " + e.toString());
+        }
+    }
+
+    public void IniciarSesion_vendedor(String usuario, String clave){
+        conn = connection.getConnection();
+        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from Usuario WHERE FKtipo_rol = 'ven' AND usuN_Usu = ? AND pass_Usu = ?";
+        try{
+            ps = conn.prepareStatement(sql);
+            //ps.setString(1,rol);
+            ps.setString(1,usuario);
+            ps.setString(2,clave);
 
             rs = ps.executeQuery();
             if(rs.next() == false){
@@ -58,6 +86,5 @@ public class login_mysql {
             JOptionPane.showMessageDialog(null, "error en iniciar sesion: " + e.toString());
         }
     }
-
     //******************************************
 }

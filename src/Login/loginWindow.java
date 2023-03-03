@@ -31,8 +31,8 @@ public class loginWindow extends JFrame{
                 String clave_usuario = contraTField.getText();
                 int seleccionado = rolBox.getSelectedIndex();
                 String rol_usuario = (String)rolBox.getItemAt(seleccionado);
-                lmsql.IniciarSesion(nombre_usuario, clave_usuario, rol_usuario);
-
+                lmsql.IniciarSesion(nombre_usuario, clave_usuario);
+                dispose();
             }
         });
 
