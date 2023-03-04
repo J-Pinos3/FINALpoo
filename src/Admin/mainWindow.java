@@ -1,33 +1,24 @@
 package Admin;
 import Admin.*;
+import jdk.jfr.Event;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class mainWindow extends  JFrame{
-    private JMenu subMenuUsers, subMenuProducts, subMenuProviders, subMenuRoles, subMenuInventory
-            , subMenuReports, subMenuSell, subMenuOption;
+    private JMenu subMenuUsers, subMenuProducts, subMenuProviders, subMenuReports, subMenuSell, subMenuEmpresa;
     private JMenuItem itemUsuario;
-    private JMenuItem itemDeleteU;
-    private JMenuItem itemRegisterP;
-    private JMenuItem itemUpdateP;
-    private JMenuItem itemDeletePr;
-    private JMenuItem itemUpdatePr;
-    private JMenuItem itemDeleteR;
-    private JMenuItem itemUpdateR;
-    private JMenuItem itemInventory;
-    private JMenuItem itemSearchAll;
+    private JMenuItem itemProducto;
+    private  JMenuItem itemReports;
+    private  JMenuItem itemShell;
     private JMenuItem itemPath;
-    private JMenuItem itemEmp;
-    private JMenuItem itemUpdateU;
-    private JMenuItem itemGenerateSell;
-    private JMenuItem itemDeleteP;
-    private JMenuItem itemRegisterPr;
+    private JMenuItem itemProvider;
+    private  JMenuItem itemEmpresa;
 
-    private ImageIcon image;
 
 
     public mainWindow(){
@@ -46,31 +37,29 @@ public class mainWindow extends  JFrame{
             subMenuProducts = new JMenu("Productos");
             menuBar.add(subMenuProducts);
 
-            subMenuProviders = new JMenu("Proveedores");
+            subMenuProviders = new JMenu("Provedores");
             menuBar.add(subMenuProviders);
-
-            subMenuRoles = new JMenu("Roles");
-            menuBar.add(subMenuRoles);
-
-            subMenuInventory = new JMenu("Consultar");
-            menuBar.add(subMenuInventory);
 
             subMenuReports = new JMenu("Reportes");
             menuBar.add(subMenuReports);
 
-            subMenuOption = new JMenu("Opciones");
-            menuBar.add(subMenuOption);
+            subMenuEmpresa = new JMenu("Empresa");
+            menuBar.add(subMenuEmpresa);
 
 
             // Items of 'Sell'
-            itemGenerateSell = new JMenuItem("Generar");
-            subMenuSell.add(itemGenerateSell);
-
             itemUsuario = new JMenuItem("Usuarios");
             subMenuUsers.add(itemUsuario);
 
             itemUsuario.addActionListener(e -> new userWindow());
 
+            itemEmpresa = new JMenuItem("Empresa");
+            subMenuEmpresa.add(itemEmpresa);
+            itemEmpresa.addActionListener(e -> new companyWindow());
+
+            itemProvider = new JMenuItem("Provedor");
+            subMenuProviders.add(itemProvider);
+            itemProvider.addActionListener(e -> new providerWindow());
 
 
 

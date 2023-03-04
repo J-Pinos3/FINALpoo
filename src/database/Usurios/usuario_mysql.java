@@ -13,22 +13,22 @@ public class usuario_mysql {
     private ResultSet rs = null;
     String qry = "";
 
-    public void MostrarRol(JComboBox cmn){
+    public void CargarRol(JComboBox cmn){
         conn = connection.getConnection();
-        qry = "SELECT desc_rol from rol";
+        qry = "SELECT tipo_rol from rol";
         try{
             ps = conn.prepareStatement(qry);
 
             rs = ps.executeQuery();
             while(rs.next()){
-                cmn.addItem( rs.getString("desc_rol") );
+                cmn.addItem( rs.getString("tipo_rol") );
             }
 
             ps.close();
             rs.close();
             conn.close();
         }catch (HeadlessException | SQLException e){
-            JOptionPane.showMessageDialog(null, e.toString());
+            JOptionPane.showMessageDialog(null, "combo rol: " + e.toString());
         }
     }
     
@@ -40,93 +40,49 @@ public class usuario_mysql {
             ps = conn.prepareStatement(qry);
             ps.setString(1,DNI);
             rs = ps.executeQuery();
-            while(rs.next()){
+            if(rs.next() == true){
                 String dni = rs.getString("ident_Usu");
                 String nombre = rs.getString("nom_Usu");
                 String apellido = rs.getString("ape_Usu");
-                Date ingreso = rs.getDate("ing_Usu");
+                String ingreso = rs.getString("ing_Usu");
                 String telefono = rs.getString("tel_Usu");
+                String correo = rs.getString("ema_Usu");
                 String rol = rs.getString("FKtipo_rol");
                 String usuario = rs.getString("usuN_Usu");
                 String contrasenia = rs.getString("pass_Usu");
 
-                Lista_usuario.add(0,dni);
-                Lista_usuario.add(1,nombre);
-                Lista_usuario.add(2,apellido);
-                Lista_usuario.add(3,ingreso.toString());
-                Lista_usuario.add(4,telefono);
-                Lista_usuario.add(5,rol);
-                Lista_usuario.add(6,usuario);
-                Lista_usuario.add(7,contrasenia);
+                Lista_usuario.add(dni);
+                Lista_usuario.add(nombre);
+                Lista_usuario.add(apellido);
+                Lista_usuario.add(ingreso);
+                Lista_usuario.add(telefono);
+                Lista_usuario.add(correo);
+                Lista_usuario.add(rol);
+                Lista_usuario.add(usuario);
+                Lista_usuario.add(contrasenia);
 
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             }
 
             ps.close();
             rs.close();
             conn.close();
-
-            return Lista_usuario;
         }
         catch (HeadlessException | SQLException e){
             JOptionPane.showMessageDialog(null, e.toString());
         }
-    }
-/*
-   public List ListarCliente(){
-
-        try{
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while( rs.next() ){
-                Cliente cl = new Cliente();
-                cl.setId(rs.getInt("id"));
-                cl.setDni(rs.getInt("dni"));
-                cl.setNombre(rs.getString("nombre"));
-                cl.setTelefono(rs.getInt("telefono"));
-                cl.setDireccion(rs.getString("direccion"));
-                cl.setRazon(rs.getString("razon"));
-                ListaCl.add(cl);
-            }
-
-        }catch (HeadlessException | SQLException e){
-            System.out.println("Error: " + e.toString());
-        }
-        return ListaCl;
+        return Lista_usuario;
     }
 
-
------------------------------------------------------------------
-    public void ListarClientes(){
-        List<Cliente> ListarCl = cliente.ListarCliente();
-        String[] titulos = {"ID","Cédula/RUC","Nombre","Teléfono","Dirección","Razón Social"};
-        //modelo = (DefaultTableModel) TableCliente.getModel();
-        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-
-        Object[] obj = new Object[6];
-        for(int i = 0; i < ListarCl.size(); i++){
-            obj[0] = ListarCl.get(i).getId();
-            obj[1] = ListarCl.get(i).getDni();
-            obj[2] = ListarCl.get(i).getNombre();
-            obj[3] = ListarCl.get(i).getTelefono();
-            obj[4] = ListarCl.get(i).getDireccion();
-            obj[5] = ListarCl.get(i).getRazon();
-
-            modelo.addRow(obj);
-        }
-        TableCliente.setModel(modelo);
-    }
-
-
-*/
     public void Agregar_Usuario(String dni, String nombre, String apellido, String fechaINgreso, String telefono, String correo, String user, String password, String rol){
 
-        String sql = "INSERT INTO Usuario (ident_Usu, nom_Usu, ape_Usu, ing_Usu,tel_Usu, ema_Usu, FKtipo_rol, usuN_Usu, pass_Usu) VALUES (?,?,?,?,?,?,?,?,?)";
+        qry = "INSERT INTO usuario (ident_Usu, nom_Usu, ape_Usu, ing_Usu,tel_Usu, ema_Usu, FKtipo_rol, usuN_Usu, pass_Usu) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             conn = connection.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(qry);
             ps.setString(1, dni);
             ps.setString(2,nombre);
             ps.setString(3,apellido);
@@ -146,13 +102,14 @@ public class usuario_mysql {
 
 
         }catch (HeadlessException | SQLException e){
-            JOptionPane.showMessageDialog(null, e.toString());
+            JOptionPane.showMessageDialog(null,"user -> "+ e.toString());
+            e.printStackTrace();
 
         }finally {
             try{
                 conn.close();
             }catch (SQLException e1){
-                System.out.println("Error: " + e1.toString());
+                System.out.println("Cliente - Error: " + e1.toString());
             }
         }
 
@@ -160,10 +117,10 @@ public class usuario_mysql {
 
 
     public void Eliminar_Usuario(String dni){
-        String sql = "DELETE FROM usuario WHERE DNI = ?";
+        qry = "DELETE FROM usuario WHERE ident_Usu = ?";
         try {
             conn = connection.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(qry);
             ps.setString(1, dni);
 
 
@@ -185,5 +142,44 @@ public class usuario_mysql {
                 System.out.println("Error: " + e1.toString());
             }
         }
+    }
+
+
+    public void Actualizar_Usuario(String dni, String nombre, String apellido, String fechaINgreso, String telefono, String correo, String user, String password, String rol){
+        qry="UPDATE Usuario SET   nom_Usu = ?, ape_Usu = ?, ing_Usu = ?, tel_Usu = ?, ema_Usu = ?, FKtipo_rol = ?, usuN_Usu = ?, pass_Usu = ? WHERE ident_Usu = ?";
+
+        try {
+            conn = connection.getConnection();
+            ps = conn.prepareStatement(qry);
+
+            ps.setString(1,nombre);
+            ps.setString(2,apellido);
+            ps.setString(3,fechaINgreso);
+            ps.setString(4,telefono);
+            ps.setString(5,correo);
+            ps.setString(6,rol);
+            ps.setString(7,user);
+            ps.setString(8,password);
+            ps.setString(9, dni);
+
+            int res = ps.executeUpdate();
+            if(res > 0){
+                JOptionPane.showMessageDialog(null, "Usuario Actualizado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Actualizar el Usuario");
+            }
+
+
+        }catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+
+        }finally {
+            try{
+                conn.close();
+            }catch (SQLException e1){
+                System.out.println("Error: " + e1.toString());
+            }
+        }
+
     }
 }

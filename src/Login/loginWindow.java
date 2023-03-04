@@ -9,7 +9,7 @@ public class loginWindow extends JFrame{
     private JPanel pantallaLogin;
     private JComboBox rolBox;
     private JTextField usuarioTField;
-    private JTextField contraTField;
+    private JPasswordField contraTField;
     private JButton iniciarSesiónButton;
     private JButton salirButton;
 

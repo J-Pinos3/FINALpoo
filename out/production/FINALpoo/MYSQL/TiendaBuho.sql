@@ -2,6 +2,8 @@
 CREATE DATABASE tiendabuho;
 USE tiendabuho;
 
+SET FOREIGN_KEY_CHECKS =0;
+
 CREATE TABLE rol(
 	tipo_rol VARCHAR(3) PRIMARY KEY NOT NULL,
     desc_rol VARCHAR(15) NOT NULL
@@ -61,12 +63,19 @@ CREATE TABLE Usuario(
     FKtipo_rol VARCHAR(3) NULL,
     usuN_Usu VARCHAR(10) NOT NULL,
     pass_Usu VARCHAR(255) NOT NULL,
-    FOREIGN KEY (FKtipo_rol) REFERENCES rol(tipo_rol) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (FKtipo_rol) REFERENCES rol(tipo_rol)
+    /*FOREIGN KEY (FKtipo_rol) REFERENCES rol(tipo_rol) ON DELETE SET NULL ON UPDATE CASCADE*/
 );
+
+DROP TABLE usuario;
 
 INSERT INTO usuario
 VALUES('1752774305', 'Franco', 'Escamilla', '2021-01-02', '0987878987', 'franco@gmail.com', 'adm', 'admin', 'admin'),
 ('1752664471', 'Juan', 'Carlos', '2022-09-13', '0961731484', 'juan@gmail.com', 'adm', 'carlos', '123');
+
+INSERT INTO usuario VALUES('111', '111', 'moris', '2022-09-13', '111', '111', 'adm', '111', '111');
+
+SELECT * FROM usuario;
 
 CREATE TABLE empresa(
 	ruc_Emp VARCHAR(13) PRIMARY KEY,
@@ -77,6 +86,7 @@ CREATE TABLE empresa(
 );
 
 INSERT INTO empresa VALUES('DEFAULT', 'DEFAULT', 'DEFAULT', 'DEFAULT', 'DEFAULT');
+SELECT * FROM EMPRESA;
 
 CREATE TABLE CabFactura(
 	num_CF INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
