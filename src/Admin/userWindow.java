@@ -89,8 +89,6 @@ public class userWindow extends JFrame{
         });
 
 
-
-
         ACTUALIZARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
