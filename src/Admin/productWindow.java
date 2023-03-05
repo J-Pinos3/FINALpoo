@@ -29,7 +29,9 @@ public class productWindow extends JFrame{
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
 
         pro_mysql.CargarProveedor(providersCB);
 

@@ -66,6 +66,10 @@ public class mainWindow extends  JFrame{
             subMenuProducts.add(itemProducto);
             itemProvider.addActionListener(e -> new productWindow());
 
+            itemReports = new JMenuItem("Reporte");
+            subMenuReports.add(itemReports);
+            itemReports.addActionListener(e -> new  reportWindow());
+
 
 
 

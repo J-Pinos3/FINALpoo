@@ -35,7 +35,7 @@ public class usuario_mysql {
     public List Buscar_Usuario(String DNI){
         List<String> Lista_usuario = new ArrayList();
         conn = connection.getConnection();
-        qry = "Select * from Usuario where ident_Usu = ?";
+        qry = "Select * from usuario where ident_Usu = ?";
         try {
             ps = conn.prepareStatement(qry);
             ps.setString(1,DNI);
@@ -146,7 +146,7 @@ public class usuario_mysql {
 
 
     public void Actualizar_Usuario(String dni, String nombre, String apellido, String fechaINgreso, String telefono, String correo, String user, String password, String rol){
-        qry="UPDATE Usuario SET   nom_Usu = ?, ape_Usu = ?, ing_Usu = ?, tel_Usu = ?, ema_Usu = ?, FKtipo_rol = ?, usuN_Usu = ?, pass_Usu = ? WHERE ident_Usu = ?";
+        qry="UPDATE usuario SET   nom_Usu = ?, ape_Usu = ?, ing_Usu = ?, tel_Usu = ?, ema_Usu = ?, FKtipo_rol = ?, usuN_Usu = ?, pass_Usu = ? WHERE ident_Usu = ?";
 
         try {
             conn = connection.getConnection();

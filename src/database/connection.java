@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class connection{
 
-    public static Connection connection_java() {
+    public static Connection getConnection() {
 
         String url = "jdbc:mysql://mysql-david2405.alwaysdata.net/david2405_poo";
         String user = "david2405_poo";
