@@ -36,7 +36,7 @@ public class login_mysql {
 
     public void IniciarSesion(String usuario, String clave){
         conn = connection.getConnection();
-        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from Usuario WHERE FKtipo_rol = 'adm' AND usuN_Usu = ? AND pass_Usu = ?";
+        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from usuario WHERE FKtipo_rol = 'adm' AND usuN_Usu = ? AND pass_Usu = ?";
         try{
             ps = conn.prepareStatement(sql);
             //ps.setString(1,rol);
@@ -64,7 +64,7 @@ public class login_mysql {
 
     public void IniciarSesion_vendedor(String usuario, String clave){
         conn = connection.getConnection();
-        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from Usuario WHERE FKtipo_rol = 'ven' AND usuN_Usu = ? AND pass_Usu = ?";
+        String sql = "SELECT usuN_Usu, pass_Usu, FKtipo_rol from usuario WHERE FKtipo_rol = 'ven' AND usuN_Usu = ? AND pass_Usu = ?";
         try{
             ps = conn.prepareStatement(sql);
             //ps.setString(1,rol);
