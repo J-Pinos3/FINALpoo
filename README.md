@@ -9,8 +9,8 @@
 - Jose Pinos
 
 <hr>
-<h3>Link del video</h3>
-
+<h3>Ejecutar programa</h3>
+<p>Abrir el archivo .exe dentro de la carpeta ejecutable</p>
 <hr>
 <h3>Capturas de pantalla de ejecución del codigo</h3>
 
