@@ -21,13 +21,13 @@ public class mainWindow extends  JFrame{
 
 
 
-            subMenuProduct = new JMenu("Clientes");
+            subMenuProduct = new JMenu("Product");
             menuBar.add(subMenuProduct);
 
-            subMenuClient = new JMenu("Facturas");
+            subMenuClient = new JMenu("Clientes");
             menuBar.add(subMenuClient);
 
-            subMenuFac = new JMenu("Productos");
+            subMenuFac = new JMenu("Facturas");
             menuBar.add(subMenuFac);
 
 
