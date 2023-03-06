@@ -38,10 +38,10 @@ public class searchWindow extends JFrame{
                 try{
                     con = conn.getConnection();
                     String[] titulos = {"Código","Detalle","Precio Unitario","Precio Venta","Stock","Descuento"};
-                    String[] registros = new String[6];
-                    String[] etiquetas = {"Código de producto", "Detalle del producto", "Precio unitario", "Precio de venta", "Stock disponible", "Descuento aplicado"};
-                    Object[][] datos = new Object[0][0];
+                    String[] registros = new String[7];
+
                     DefaultTableModel model = new DefaultTableModel(null,titulos);
+                    tabla.setModel(model);
                     ps = con.prepareStatement("SELECT * FROM producto");
                     rs = ps.executeQuery();
 
@@ -59,12 +59,13 @@ public class searchWindow extends JFrame{
                     rs.close();
                     ps.close();
 
-                }catch(SQLException e3){
-                    JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + e3);
-                }
+                    }catch(SQLException e3){
+                        JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + e3);
+                    }
 
                 }
             });
+
         buscarPorCodigoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -34,31 +34,23 @@ public class reportWindow extends JFrame{
         GenerateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String date = pathJT.getText();
+                List<String> Lista_fac = rep_mysql.qryAllInventory(date);
 
-                List<String> Lista_user = rep_mysql.qryAllInventory();
-
-                for(int i = 0; i < Lista_user.size(); i++){
-                    String cedula = Lista_user.get(i);
-
-                    String nombre = Lista_user.get(i);
-
-                    String apellido = Lista_user.get(i);
-
-                    String fecha = Lista_user.get(i);
-                    String celular =Lista_user.get(i);
-
-                    String correo = Lista_user.get(i);
-
-                    String rol = Lista_user.get(i);
-                    String usuario = Lista_user.get(i) ;
-
-                    String pass = Lista_user.get(i);
-
-                    System.out.println(Lista_user.get(i));
+                for(int i = 0; i < Lista_fac.size(); i++){
+                    String id_fac = Lista_fac.get(i);
+                    String ruc = Lista_fac.get(i);
+                    String  ci_cli = Lista_fac.get(i);
+                    String ci_usu = Lista_fac.get(i);
+                    String fecha = Lista_fac.get(i);
+                    String cod_prod =Lista_fac.get(i);
+                    String total = Lista_fac.get(i);
+                    System.out.println(Lista_fac.get(i));
 
                 }
                 try {
-                    crearPDF(Lista_user);
+                    crearPDF(Lista_fac);
+
                 } catch (FileNotFoundException ex) {
                     throw new RuntimeException(ex);
                 } catch (DocumentException ex) {
@@ -73,7 +65,7 @@ public class reportWindow extends JFrame{
         Document documento = new Document();
 
         // El OutPutStream para el fichero donde crearemos el PDF
-        FileOutputStream ficheroPDF = new FileOutputStream("Usuarios.pdf");
+        FileOutputStream ficheroPDF = new FileOutputStream("Reporte.pdf");
 
         // Se asocia el documento de OutPutStream
         PdfWriter.getInstance(documento, ficheroPDF);
@@ -94,22 +86,20 @@ public class reportWindow extends JFrame{
         documento.add(titulo);
 
         // Creamos una tabla
-        PdfPTable tabla = new PdfPTable(9);
-        tabla.addCell("ID");
-        tabla.addCell("NOMBRE");
-        tabla.addCell("APELLIDO");
-        tabla.addCell("FECHA INGRESO");
-        tabla.addCell("TELEFONO");
-        tabla.addCell("EMAIL");
-        tabla.addCell("ROL");
-        tabla.addCell("USUARIO");
-        tabla.addCell("PASSWORD");
+        PdfPTable tabla = new PdfPTable(7);
+        tabla.addCell("ID FACTURA");
+        tabla.addCell("RUC EMPRESA");
+        tabla.addCell("CEDULA CLIENTE");
+        tabla.addCell("CEDULA USUARIO");
+        tabla.addCell("FECHA FACTURA");
+        tabla.addCell("COD PRODUCTO");
+        tabla.addCell("TOTAL");
+
 
         for(int i = 0 ; i < lista.size() ; i++) {
             tabla.addCell(lista.get(i));
-
+            System.out.println(lista.get(i));
         }
-
 
 
         // Añadimos la tabla al documento

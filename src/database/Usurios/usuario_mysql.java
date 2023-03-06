@@ -109,7 +109,7 @@ public class usuario_mysql {
             try{
                 conn.close();
             }catch (SQLException e1){
-                System.out.println("Cliente - Error: " + e1.toString());
+                System.out.println("usuario - Error: " + e1.toString());
             }
         }
 

@@ -1,6 +1,7 @@
 package database.Login_mysql;
 import database.connection;
 
+import User.*;
 import Admin.*;
 import javax.swing.*;
 import java.awt.*;
@@ -50,10 +51,6 @@ public class login_mysql {
                 new mainWindow();
 
             }
-
-
-
-
             ps.close();
 
             conn.close();
@@ -74,6 +71,9 @@ public class login_mysql {
             rs = ps.executeQuery();
             if(rs.next() == false){
                 JOptionPane.showMessageDialog(null,"El usuario ingresado no existe");
+            }
+            else {
+                new mainWindow_User();
             }
 
 

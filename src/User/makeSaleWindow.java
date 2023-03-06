@@ -1,5 +1,5 @@
 package User;
-import User.database_usuario.makeSaleWindow_mysql;
+import database.Facturas.facturas_mysql;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -25,12 +25,11 @@ public class makeSaleWindow extends JFrame{
     private JLabel subTotalJL;
     private JLabel cambioJL;
     private JPanel makeSale;
-    private JButton BUSCARCLIENTEButton;
-    private JButton BUSCARPRODUCTOButton;
     private JComboBox cmbCedVendedor;
     private JComboBox cmbRucEmpresa;
     private JTextField iva_Texto;
     private JButton PAGARButton;
+    private JTextField cantidadProducto;
     private facturas_mysql  fac_mysql = new facturas_mysql();
 
     public makeSaleWindow() {
@@ -57,20 +56,41 @@ public class makeSaleWindow extends JFrame{
                 String ruc_emp = (String)cmbRucEmpresa.getItemAt(selec2);
 
                 fac_mysql.insertar_cabecera(ruc_emp,dniCliente.getText(),ced_vendedor,fecha_venta.getText());
-                fac_mysql.insertar_detalle(codigoProducto.getText(),Double.parseDouble(iva_Texto.getText()),Double.parseDouble(descuento.getText()),Double.parseDouble(moneyUserJT.getText()));
+                fac_mysql.insertar_detalle(codigoProducto.getText(),Double.parseDouble(iva_Texto.getText()),Double.parseDouble(descuento.getText()),Double.parseDouble(moneyUserJT.getText()),Double.parseDouble(cantidadProducto.getText()));
 
+            }
+        });
+        printButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List <String> Fac = fac_mysql.exportar_pdf();
+                for(int i = 0; i < Fac.size(); i++){
+                    String id_fac = Fac.get(i);
+                    String  cod_prod = Fac.get(i);
+                    String Iva = Fac.get(i);
+                    String descuento = Fac.get(i);
+                    String total = Fac.get(i);
+
+                    System.out.println(Fac.get(i));
+
+                }
+                try {
+                    crearPDF(Fac);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (DocumentException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
 
-    public static void crearPDF_Venta(String dni, String nombre, String apellido, String direccion, String telefono,
-                                      String iva, String total, String dinero, String cambio) throws FileNotFoundException, DocumentException {
-
+    public static void crearPDF(List<String> lista) throws FileNotFoundException, DocumentException {
         // Se crea el documento
         Document documento = new Document();
 
         // El OutPutStream para el fichero donde crearemos el PDF
-        FileOutputStream ficheroPDF = new FileOutputStream("Venta.pdf");
+        FileOutputStream ficheroPDF = new FileOutputStream("Factura.pdf");
 
         // Se asocia el documento de OutPutStream
         PdfWriter.getInstance(documento, ficheroPDF);
@@ -79,7 +99,7 @@ public class makeSaleWindow extends JFrame{
         documento.open();
 
         // Parrafo
-        Paragraph titulo = new Paragraph("Datos de venta \n\n",
+        Paragraph titulo = new Paragraph("Lista de personas \n\n",
                 FontFactory.getFont("arial",
                         22,
                         Font.BOLD,
@@ -91,27 +111,18 @@ public class makeSaleWindow extends JFrame{
         documento.add(titulo);
 
         // Creamos una tabla
-        PdfPTable tabla = new PdfPTable(2);
-        tabla.addCell("Campo");
-        tabla.addCell("Valor");
-        tabla.addCell("DNI");
-        tabla.addCell(dni);
-        tabla.addCell("Nombre");
-        tabla.addCell(nombre);
-        tabla.addCell("Apellido");
-        tabla.addCell(apellido);
-        tabla.addCell("Dirección");
-        tabla.addCell(direccion);
-        tabla.addCell("Teléfono");
-        tabla.addCell(telefono);
+        PdfPTable tabla = new PdfPTable(5);
+        tabla.addCell("ID FACTURA");
+        tabla.addCell("COD PRODUCTO");
         tabla.addCell("IVA");
-        tabla.addCell(iva);
-        tabla.addCell("Total");
-        tabla.addCell(total);
-        tabla.addCell("Dinero");
-        tabla.addCell(dinero);
-        tabla.addCell("Cambio");
-        tabla.addCell(cambio);
+        tabla.addCell("DESCUENTO");
+        tabla.addCell("TOTAL");
+
+
+        for(int i = 0 ; i < lista.size() ; i++) {
+            tabla.addCell(lista.get(i));
+        }
+
 
         // Añadimos la tabla al documento
         documento.add(tabla);
@@ -119,4 +130,5 @@ public class makeSaleWindow extends JFrame{
         // Se cierra el documento
         documento.close();
     }
+
 }

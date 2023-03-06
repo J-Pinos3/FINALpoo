@@ -1,10 +1,8 @@
 package User;
-import Admin.*;
-import database.*;
 import javax.swing.*;
 
-public class mainWindow extends  JFrame{
-    private JMenu subMenuProduct, subMenuClient, subMenuFac;
+public class mainWindow_User extends  JFrame{
+    private JMenu subMenuProduct, subMenuClient, subMenuFac,subMenu;
     private JMenuItem itemProducto;
     private  JMenuItem itemClient;
     private JMenuItem itemFac;
@@ -12,7 +10,7 @@ public class mainWindow extends  JFrame{
 
 
 
-    public mainWindow(){
+    public mainWindow_User(){
         // Create a main MenuBar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -33,7 +31,7 @@ public class mainWindow extends  JFrame{
 
 
             itemClient = new JMenuItem("Cliente");
-            subMenuClient.add(subMenuClient);
+            subMenuClient.add(itemClient);
             itemClient.addActionListener(e -> new sellWindow());
 
             itemFac = new JMenuItem("Factura");

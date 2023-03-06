@@ -19,9 +19,8 @@ public class loginWindow extends JFrame{
         setTitle("Login");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800,500);
-
         login_mysql lmsql = new login_mysql();
-        lmsql.MostrarRol(rolBox);
+
 
         //*********************************************
         iniciarSesiónButton.addActionListener(new ActionListener() {
@@ -29,9 +28,8 @@ public class loginWindow extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String nombre_usuario = usuarioTField.getText();
                 String clave_usuario = contraTField.getText();
-                int seleccionado = rolBox.getSelectedIndex();
-                String rol_usuario = (String)rolBox.getItemAt(seleccionado);
                 lmsql.IniciarSesion(nombre_usuario, clave_usuario);
+                lmsql.IniciarSesion_vendedor(nombre_usuario,clave_usuario);
                 dispose();
             }
         });

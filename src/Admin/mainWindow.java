@@ -28,8 +28,7 @@ public class mainWindow extends  JFrame{
 
         // Create submenus for CRUD
 
-            subMenuSell = new JMenu("Factura");
-            menuBar.add(subMenuSell);
+
 
             subMenuUsers = new JMenu("Usuarios");
             menuBar.add(subMenuUsers);
