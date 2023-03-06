@@ -121,7 +121,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="a96b5" class="javax.swing.JTextField" binding="adressJt">
         <constraints>
@@ -129,7 +131,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="3acea" class="javax.swing.JTextField" binding="emailJT">
         <constraints>
@@ -145,7 +149,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="ec6ba" class="javax.swing.JLabel">
         <constraints>

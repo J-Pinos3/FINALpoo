@@ -308,11 +308,11 @@ public class sellWindow extends JFrame {
         });
 
         cleanButtonDe.addActionListener(e -> this.cleanAllDelete());
-        // Button to make sell
+        // Button to User.database_usuario.make sell
         sellButton.addActionListener(e -> {
             if (co.numberDetails() != 0){
                 subT_CF.set(co.currentPrice());
-                new makeSaleWindow(subT_CF.get());
+                new User.database_usuario.makeSaleWindow(subT_CF.get());
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No existen detalles", "ERROR", JOptionPane.ERROR_MESSAGE);
