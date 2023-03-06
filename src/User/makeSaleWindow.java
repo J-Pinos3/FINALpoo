@@ -12,19 +12,26 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 public class makeSaleWindow extends JFrame{
-    private JTextField dniJT;
-    private JTextField nameJT;
-    private JTextField lastJT;
-    private JTextField adressJt;
-    private JTextField phoneJT;
+    private JTextField dniCliente;
+    private JTextField dniProveedor;
+    private JTextField fecha_venta;
+    private JTextField codigoProducto;
+    private JTextField rucEmpresa;
     private JButton queryButton;
-    private JTextField ivaJT;
+    private JTextField descuento;
     private JTextField totalJT;
     private JTextField moneyUserJT;
     private JButton printButton;
     private JLabel subTotalJL;
     private JLabel cambioJL;
     private JPanel makeSale;
+    private JButton BUSCARCLIENTEButton;
+    private JButton BUSCARPRODUCTOButton;
+    private JComboBox cmbCedVendedor;
+    private JComboBox cmbRucEmpresa;
+    private JTextField iva_Texto;
+    private JButton PAGARButton;
+    private facturas_mysql  fac_mysql = new facturas_mysql();
 
     public makeSaleWindow() {
         setTitle("Producto");
@@ -36,31 +43,22 @@ public class makeSaleWindow extends JFrame{
         //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        queryButton.addActionListener(new ActionListener() {
+        fac_mysql.CargarCedulaVendedor(cmbCedVendedor);
+        fac_mysql.CargarRucEmpresa(cmbRucEmpresa);
+
+
+        PAGARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String DNI = dniJT.getText();
-                List<String> Lista_venta = makeSaleWindow_mysql.Buscar_Venta(DNI);
-                for (int i = 0;  i < Lista_venta.size(); i ++) {
-                    dniJT.setText((Lista_venta.get(0)));
-                    nameJT.setText((Lista_venta.get(1)));
-                    lastJT.setText((Lista_venta.get(2)));
-                    adressJt.setText((Lista_venta.get(3)));
-                    phoneJT.setText((Lista_venta.get(4)));
-                    ivaJT.setText((Lista_venta.get(5)));
-                    totalJT.setText((Lista_venta.get(6)));
-                    moneyUserJT.setText((Lista_venta.get(7)));
-                    cambioJL.setText((Lista_venta.get(8)));
-                }
+                int selec = cmbCedVendedor.getSelectedIndex();
+                String ced_vendedor = (String)cmbCedVendedor.getItemAt(selec);
 
-                // Crear archivo PDF con los datos de venta
-                try {
-                    crearPDF_Venta(dniJT.getText(), nameJT.getText(), lastJT.getText(), adressJt.getText(),
-                            phoneJT.getText(), ivaJT.getText(), totalJT.getText(), moneyUserJT.getText(),
-                            cambioJL.getText());
-                } catch (FileNotFoundException | DocumentException ex) {
-                    ex.printStackTrace();
-                }
+                int selec2 = cmbRucEmpresa.getSelectedIndex();
+                String ruc_emp = (String)cmbRucEmpresa.getItemAt(selec2);
+
+                fac_mysql.insertar_cabecera(ruc_emp,dniCliente.getText(),ced_vendedor,fecha_venta.getText());
+                fac_mysql.insertar_detalle(codigoProducto.getText(),Double.parseDouble(iva_Texto.getText()),Double.parseDouble(descuento.getText()),Double.parseDouble(moneyUserJT.getText()));
+
             }
         });
     }
