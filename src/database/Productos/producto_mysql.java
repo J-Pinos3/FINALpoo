@@ -172,7 +172,7 @@ public class producto_mysql {
             }
         }
     }
-    public List Buscar_Productos(String codigo){
+    public List Buscar_Productos(){
         List<Object> Lista_proveedor = new ArrayList();
         //le puse de tipo objeto xq en esta lista hay datos que no son String
         conn = connection.getConnection();
@@ -183,11 +183,11 @@ public class producto_mysql {
             while (rs.next()){
                 String codProd = rs.getString("cod_Pro");
                 String detalle = rs.getString("det_Pro");
-                double prec_unitario = rs.getDouble("preUni_Pro");
-                double prec_venta = rs.getDouble("preVen_Pro");
-                int stock = rs.getInt("sto_Pro");
-                double descuento = rs.getDouble("desc_Pro");
-                String proveedor = rs.getString("FKident_Prov");
+                String prec_unitario = String.valueOf(rs.getDouble("preUni_Pro")) ;
+                String prec_venta = String.valueOf(rs.getString("preVen_Pro"));
+                String stock = String.valueOf(rs.getString("sto_Pro")) ;
+                String descuento = String.valueOf(rs.getFloat("desc_Pro"));
+
 
                 Lista_proveedor.add(codProd);
                 Lista_proveedor.add(detalle);
@@ -195,7 +195,6 @@ public class producto_mysql {
                 Lista_proveedor.add(prec_venta);
                 Lista_proveedor.add(stock);
                 Lista_proveedor.add(descuento);
-                Lista_proveedor.add(proveedor);
 
 
             }
