@@ -1,12 +1,10 @@
-
-import Login.loginWindow;
-import Admin.*;
+import User.makeSaleWindow;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        new mainWindow();
+        new makeSaleWindow();
 
 
 
