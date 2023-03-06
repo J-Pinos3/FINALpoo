@@ -15,6 +15,9 @@
 <h3>Capturas de pantalla de ejecución del codigo</h3>
 
 <h4>Inventario</h4>
-![image](https://user-images.githubusercontent.com/96399138/223027457-ef5565b0-6588-4bf6-abe4-b7063e486596.png)
-
+![Login](https://raw.githubusercontent.com/J-Pinos3/FINALpoo/main/assets/pictures/login.png)
+![Cajero1](https://raw.githubusercontent.com/J-Pinos3/FINALpoo/main/assets/pictures/producto.png)
+![Cajero2](https://raw.githubusercontent.com/J-Pinos3/FINALpoo/main/assets/pictures/producto2.png)
+![Cajero3](https://raw.githubusercontent.com/J-Pinos3/FINALpoo/main/assets/pictures/producto3.png)
+![Cajero4](https://raw.githubusercontent.com/J-Pinos3/FINALpoo/main/assets/pictures/producto4.png)
 <hr>
